@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
@@ -35,5 +39,72 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+
+    public void convert(View v) {
+        EditText etInput = (EditText)findViewById(R.id.etInput);
+        String s = etInput.getText().toString();
+        Double input = Double.parseDouble(s);
+        Double temp = 0.0;
+        RadioGroup rgFrom = (RadioGroup) findViewById(R.id.rgFrom);
+        RadioGroup rgTo = (RadioGroup) findViewById(R.id.rgTo);
+
+        int selFrom = rgFrom.getCheckedRadioButtonId();
+        int selTo = rgTo.getCheckedRadioButtonId();
+
+        if (selFrom == R.id.rbFrmC) {
+            temp = input;
+        } else if(selFrom == R.id.rbFrmF) {
+            temp = (input - 32) * 5 / 9;
+        } else if (selFrom == R.id.rbFrmK) {
+            temp = input-273.15;
+        }
+
+        if (selTo == R.id.rbToC) {
+
+        } else if (selTo == R.id.rbToF){
+            temp = temp *9 /5 +32;
+        } else if (selTo == R.id.rbToK){
+            temp = temp +273.15;
+        }
+          /**
+
+            if(selTo == R.id.rbToC){
+
+            } else if (selTo == R.id.rbToF) {
+                // Celcius *9 /5 +32
+                in = in*9/5+32;
+            } else if (selTo == R.id.rbToK){
+                in = in+273.15;
+            }
+        } else if (selFrom == R.id.rbFrmF) {
+            if(selTo == R.id.rbToC){
+                in = (in - 32)*5/9;
+            } else if (selTo == R.id.rbToF) {
+
+            } else if (selTo == R.id.rbToK){
+                in = (in + 459.67) *5 /9;
+            }
+        } else if (selFrom == R.id.rbFrmK) {
+            if(selTo == R.id.rbToC){
+
+            } else if (selTo == R.id.rbToF) {
+                in= in *9/5 -459.67;
+            } else if (selTo == R.id.rbToK){
+
+            }
+        }
+
+       */
+
+        TextView tvOutput;
+        tvOutput = (TextView) findViewById(R.id.tvOutput);
+        tvOutput.setText(Double.toString(temp));
     }
 }
